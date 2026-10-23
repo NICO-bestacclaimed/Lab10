@@ -58,7 +58,7 @@ export default function FormularioProducto({ onRegistrar }) {
             <Input
               id="descripcion"
               name="descripcion"
-              className="h-11 bg-white"
+              className="h-11 bg-background"
               placeholder="Ej. Galletas de avena"
               value={formulario.descripcion}
               onChange={(evento) => actualizarCampo('descripcion', evento.target.value)}
@@ -66,19 +66,19 @@ export default function FormularioProducto({ onRegistrar }) {
               aria-describedby={errores.descripcion ? 'error-descripcion' : undefined}
               required
             />
-            {errores.descripcion && <p id="error-descripcion" className="text-xs leading-5 text-red-700">{errores.descripcion}</p>}
+            {errores.descripcion && <p id="error-descripcion" className="text-xs leading-5 text-red-300">{errores.descripcion}</p>}
           </div>
           <div className="space-y-2">
             <Label htmlFor="precio">Precio de venta</Label>
             <div className="relative">
-              <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-sm text-slate-400" aria-hidden="true">S/</span>
+              <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-sm text-muted-foreground" aria-hidden="true">S/</span>
               <Input
                 id="precio"
                 name="precio"
                 type="number"
                 inputMode="decimal"
                 step="0.01"
-                className="h-11 bg-white pl-9"
+                className="h-11 bg-background pl-9"
                 placeholder="0.00"
                 value={formulario.precio}
                 onChange={(evento) => actualizarCampo('precio', evento.target.value)}
@@ -87,14 +87,14 @@ export default function FormularioProducto({ onRegistrar }) {
                 required
               />
             </div>
-            {errores.precio && <p id="error-precio" className="text-xs leading-5 text-red-700">{errores.precio}</p>}
+            {errores.precio && <p id="error-precio" className="text-xs leading-5 text-red-300">{errores.precio}</p>}
           </div>
           <div className="space-y-2">
             <Label htmlFor="categoria">Categoría</Label>
             <NativeSelect
               id="categoria"
               name="categoria"
-              className="w-full bg-white [&_select]:h-11"
+              className="w-full rounded-sm bg-background [&_select]:h-11"
               value={formulario.categoria}
               onChange={(evento) => actualizarCampo('categoria', evento.target.value)}
               aria-invalid={Boolean(errores.categoria)}
@@ -104,15 +104,15 @@ export default function FormularioProducto({ onRegistrar }) {
               <NativeSelectOption value="" disabled>Selecciona una categoría</NativeSelectOption>
               {categorias.map((categoria) => <NativeSelectOption key={categoria} value={categoria}>{categoria}</NativeSelectOption>)}
             </NativeSelect>
-            {errores.categoria && <p id="error-categoria" className="text-xs leading-5 text-red-700">{errores.categoria}</p>}
+            {errores.categoria && <p id="error-categoria" className="text-xs leading-5 text-red-300">{errores.categoria}</p>}
           </div>
           <div className="flex flex-col gap-2 pt-2 min-[360px]:flex-row">
             <Button type="submit" className="h-11 flex-1 gap-2"><Plus aria-hidden="true" />Registrar producto</Button>
             <Button type="button" variant="outline" className="h-11 gap-2 px-3" onClick={limpiarFormulario}><RotateCcw aria-hidden="true" />Limpiar</Button>
           </div>
-          {Object.values(errores).some(Boolean) && <p role="alert" className="text-xs leading-5 text-red-700">Revisa los campos indicados antes de registrar.</p>}
+          {Object.values(errores).some(Boolean) && <p role="alert" className="text-xs leading-5 text-red-300">Revisa los campos indicados antes de registrar.</p>}
           {confirmacion && (
-            <div role="status" aria-live="polite" className="flex items-start gap-2 rounded-lg bg-emerald-50 p-3 text-sm leading-5 break-words text-emerald-800">
+            <div role="status" aria-live="polite" className="flex items-start gap-2 rounded-sm border border-emerald-800 bg-emerald-950 p-3 text-sm leading-5 break-words text-emerald-200">
               <CheckCircle2 className="mt-0.5 size-4 shrink-0" aria-hidden="true" /><p className="min-w-0">{confirmacion}</p>
             </div>
           )}
