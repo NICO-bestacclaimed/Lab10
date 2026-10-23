@@ -1,10 +1,18 @@
 import { useState } from 'react'
 import { Info, Package } from 'lucide-react'
 import ListadoProductos from '@/components/ListadoProductos'
+import FormularioProducto from '@/components/FormularioProducto'
 import { productosIniciales } from '@/data/productos'
 
 export default function App() {
-  const [productos] = useState(() => productosIniciales.map((producto) => ({ ...producto })))
+  const [productos, setProductos] = useState(() => productosIniciales.map((producto) => ({ ...producto })))
+
+  function registrarProducto(datos) {
+    setProductos((actuales) => {
+      const codigo = Math.max(0, ...actuales.map((producto) => producto.codigo)) + 1
+      return [...actuales, { codigo, ...datos }]
+    })
+  }
 
   return (
     <div className="min-h-screen">
@@ -29,7 +37,10 @@ export default function App() {
           <Info className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
           <p><span className="font-semibold">Registros temporales.</span> Los productos añadidos se perderán al recargar la página.</p>
         </div>
-        <ListadoProductos productos={productos} />
+        <div className="grid items-start gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
+          <FormularioProducto onRegistrar={registrarProducto} />
+          <ListadoProductos productos={productos} />
+        </div>
         <footer className="mt-7 text-center text-xs leading-5 text-slate-500">Los códigos de los nuevos productos se generan automáticamente.</footer>
       </main>
     </div>
