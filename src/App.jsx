@@ -1,10 +1,37 @@
-import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+import { Info, Package } from 'lucide-react'
+import ListadoProductos from '@/components/ListadoProductos'
+import { productosIniciales } from '@/data/productos'
 
 export default function App() {
+  const [productos] = useState(() => productosIniciales.map((producto) => ({ ...producto })))
+
   return (
-    <main className="mx-auto max-w-6xl p-8">
-      <h1 className="mb-4 text-3xl font-semibold">Gestión de productos</h1>
-      <Button>Registrar producto</Button>
-    </main>
+    <div className="min-h-screen">
+      <header className="border-b border-slate-200/80 bg-white">
+        <div className="mx-auto flex max-w-7xl items-center gap-3 px-5 py-5 sm:px-8">
+          <span className="flex size-10 items-center justify-center rounded-xl bg-blue-700 text-white">
+            <Package className="size-5" aria-hidden="true" />
+          </span>
+          <div>
+            <p className="text-sm font-semibold tracking-tight text-slate-900">Catálogo comercial</p>
+            <p className="text-xs text-slate-500">Administración de productos</p>
+          </div>
+        </div>
+      </header>
+      <main className="mx-auto max-w-7xl px-5 py-9 sm:px-8 sm:py-12">
+        <div className="mb-7">
+          <p className="mb-2 text-xs font-semibold tracking-[0.18em] text-blue-700">CATÁLOGO</p>
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Gestión de productos</h1>
+          <p className="mt-3 text-sm leading-6 text-slate-500">Registra nuevos productos y consulta tu catálogo en un solo lugar.</p>
+        </div>
+        <div role="note" className="mb-7 flex items-start gap-3 rounded-xl border border-blue-100 bg-blue-50/70 px-4 py-3.5 text-sm leading-6 text-blue-900">
+          <Info className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+          <p><span className="font-semibold">Registros temporales.</span> Los productos añadidos se perderán al recargar la página.</p>
+        </div>
+        <ListadoProductos productos={productos} />
+        <footer className="mt-7 text-center text-xs leading-5 text-slate-500">Los códigos de los nuevos productos se generan automáticamente.</footer>
+      </main>
+    </div>
   )
 }

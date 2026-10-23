@@ -128,3 +128,16 @@
     @apply font-sans;
     }
 }
+:root {
+  --background: #f6f8fc;
+  --foreground: #18253b;
+  --primary: #1d4ed8;
+  --primary-foreground: #ffffff;
+  --ring: #93c5fd;
+  --radius: 0.75rem;
+}
+
+body {
+  margin: 0;
+  min-width: 280px;
+}
